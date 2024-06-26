@@ -8,10 +8,3 @@ const routes = [
   { path: '/calculator', component: TaxCalculator },
   { path: '/results', component: ResultPage }
 ]
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
-
-export default router

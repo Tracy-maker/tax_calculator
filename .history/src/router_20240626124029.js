@@ -6,12 +6,5 @@ import ResultPage from './components/ResultPage.vue'
 const routes = [
   { path: '/', component: HomePage },
   { path: '/calculator', component: TaxCalculator },
-  { path: '/results', component: ResultPage }
+  { path: '/results', component: ResultPageVue }
 ]
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
-
-export default router
