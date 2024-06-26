@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from './components/HomePage.vue'
-import TaxCalculator from './components/page/TaxCalculator.vue'
-import ResultPage from './components/page/ResultPage.vue'
-import ContactHelp from './components/page/ContactHelp.vue'
+import TaxCalculator from './components/TaxCalculator.vue'
+import ResultPage from './components/ResultPage.vue'
+import ContactHelp from './components/ContactHelp.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: HomePage },
