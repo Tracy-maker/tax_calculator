@@ -11,7 +11,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <footer>
+    <footer id="footer">
       <p>&copy; 2024 Tax Calculator. All rights reserved.</p>
     </footer>
   </div>
