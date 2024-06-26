@@ -4,3 +4,12 @@
     <router-link to="/calculator">Start Calculation</router-link>
   </div>
 </template>
+
+<script>
+import HomePage from './components/HomePage.vue'
+export default {
+  components: {
+    HomePage
+  }
+}
+</script>
