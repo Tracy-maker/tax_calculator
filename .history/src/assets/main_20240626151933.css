@@ -37,7 +37,7 @@ nav {
 nav a {
   color: white;
   text-decoration: none;
-  cursor: pointer;
+  cursor: pointer; /* Ensures pointer cursor on hover */
 }
 
 nav a.router-link-exact-active {
@@ -51,8 +51,8 @@ main {
 
 footer {
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-items: center; /* Center content vertically */
+  text-align: center; /* Center text */
   padding: 10px;
   background-color: #42b983;
   color: white;
@@ -67,41 +67,6 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.content {
-  position: relative;
-  text-align: center;
-  color: white;
-  z-index: 1;
-}
-
-.start-calculation {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #42b983;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
-}
-
-.start-calculation:hover {
-  background-color: #369963;
 }
 
 .modal {

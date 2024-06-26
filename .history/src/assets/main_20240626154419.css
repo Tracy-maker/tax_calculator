@@ -67,7 +67,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: auto;
+  min-height: calc(100vh - 120px); /* Adjust according to header and footer height */
   position: relative;
   overflow: hidden;
 }
