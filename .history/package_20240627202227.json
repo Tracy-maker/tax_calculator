@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.ts,.tsx,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
-  },
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "preview": "vite preview",
+  "lint": "eslint . --ext .vue,.ts,.tsx,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+  "format": "prettier --write src/"
+}
+
   "dependencies": {
     "vue": "^3.4.29",
     "vue-router": "^4.4.0"

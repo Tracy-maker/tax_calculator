@@ -5,7 +5,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/calculator">Tax Calculator</router-link>
         <router-link to="/rank">Rank</router-link>
-        <router-link to="/contact">Help</router-link>
+        <router-link to="/contact">Contact/Help</router-link>
       </nav>
     </header>
     <main>
