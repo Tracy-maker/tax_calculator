@@ -1,26 +1,37 @@
 <template>
-  <div id="app">
-    <header>
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/calculator">Tax Calculator</router-link>
-        <router-link to="/rank">Rank</router-link>
-        <router-link to="/contact">Help</router-link>
-      </nav>
-    </header>
-    <main>
-      <router-view></router-view>
+  <div id="app" class="flex flex-col min-h-screen">
+    <AppHeader />
+
+    <main class="flex-grow container mx-auto py-8">
+      <router-view />
     </main>
-    <footer>
-      <p>&copy; 2024 Tax Calculator. All rights reserved.</p>
-    </footer>
+
+    <AppFooter />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
+import AppHeader from './components/AppHeader.vue'
+import AppFooter from './components/AppFooter.vue'
 
-export default defineComponent({
-  name: 'App'
-})
+export default {
+  name: 'App',
+  components: {
+    AppHeader,
+    AppFooter
+  }
+}
 </script>
+
+<style scoped>
+/* Make sure the entire screen is filled, and ensure spacing between components */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1; /* Ensures the main content takes up the remaining space */
+}
+</style>

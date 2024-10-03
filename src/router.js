@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from './page/HomePage.vue'
-import TaxCalculator from './page/TaxCalculator.vue'
-import RankPage from './page/RankPage.vue'
-import ContactHelp from './page/ContactHelp.vue'
+
+import TaxCalculator from './pages/TaxCalculator.vue'
+import RankPage from './pages/RankPage.vue'
+import ContactPage from './pages/ContactPage.vue'
+import HomePage from './pages/HomePage.vue'
 
 const routes = [
-  { path: '/', name: 'Home', component: HomePage },
-  { path: '/calculator', name: 'Calculator', component: TaxCalculator },
-  { path: '/rank', name: 'Rank', component: RankPage },
-  { path: '/contact', name: 'Contact', component: ContactHelp }
+  { path: '/', component: HomePage },
+  { path: '/calculator', component: TaxCalculator },
+  { path: '/rank', component: RankPage },
+  { path: '/contact', component: ContactPage }
 ]
 
 const router = createRouter({
