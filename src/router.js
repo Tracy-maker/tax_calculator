@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import TaxCalculator from './pages/TaxCalculator.vue'
-import RankPage from './pages/RankPage.vue'
+import RankPage from './pages/ResultPage.vue'
 import ContactPage from './pages/ContactPage.vue'
 import HomePage from './pages/HomePage.vue'
 
