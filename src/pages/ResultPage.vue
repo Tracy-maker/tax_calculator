@@ -1,13 +1,31 @@
 <template>
-    <div class="container mx-auto p-8">
-      <h1 class="text-3xl font-bold">Income Rank</h1>
-      <p>Your income is higher than 80% of users.</p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'RankPage'
-  }
-  </script>
-  
+  <div class="container mx-auto p-6 max-w-4xl">
+    <h2 class="text-4xl font-bold text-center text-indigo-600 mb-6">
+      Your Tax Calculation Results
+    </h2>
+    <ResultDisplay :taxableIncome="taxableIncome" :taxAmount="taxAmount" :incomeAfterTax="incomeAfterTax" />
+  </div>
+</template>
+
+<script>
+import ResultDisplay from '@/components/ResultDisplay.vue';
+
+export default {
+  data() {
+    return {
+      taxableIncome: 50000, // Sample data, replace with real calculation data
+      taxAmount: 10000,
+      incomeAfterTax: 40000,
+    };
+  },
+  components: {
+    ResultDisplay,
+  },
+};
+</script>
+
+<style scoped>
+.container {
+  max-width: 1080px;
+}
+</style>

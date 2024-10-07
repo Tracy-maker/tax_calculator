@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import TaxCalculator from './pages/TaxCalculator.vue'
-import RankPage from './pages/ResultPage.vue'
 import ContactPage from './pages/ContactPage.vue'
 import HomePage from './pages/HomePage.vue'
+import ResultPage from './pages/ResultPage.vue'
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/calculator', component: TaxCalculator },
-  { path: '/rank', component: RankPage },
+  { path: '/result', component: ResultPage },
   { path: '/contact', component: ContactPage }
 ]
 

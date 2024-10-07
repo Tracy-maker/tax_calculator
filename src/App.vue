@@ -1,11 +1,9 @@
 <template>
-  <div id="app" class="flex flex-col min-h-screen">
+  <div>
     <AppHeader />
-
-    <main class="flex-grow container mx-auto py-8">
+    <main class="pt-24 pb-16">
       <router-view />
     </main>
-
     <AppFooter />
   </div>
 </template>
@@ -22,16 +20,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/* Make sure the entire screen is filled, and ensure spacing between components */
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex-grow: 1; /* Ensures the main content takes up the remaining space */
-}
-</style>
