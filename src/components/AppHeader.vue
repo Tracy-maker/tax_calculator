@@ -19,7 +19,7 @@
         <router-link to="/result" class="text-white text-lg font-medium hover:text-gray-200 transition-colors">
           Result
         </router-link>
-        <router-link to="/contact" class="text-white text-lg font-medium hover:text-gray-200 transition-colors">
+        <router-link to="/Help" class="text-white text-lg font-medium hover:text-gray-200 transition-colors">
           Help
         </router-link>
       </div>

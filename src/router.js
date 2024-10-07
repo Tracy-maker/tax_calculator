@@ -9,7 +9,7 @@ const routes = [
   { path: '/', component: HomePage },
   { path: '/calculator', component: TaxCalculator },
   { path: '/result', component: ResultPage },
-  { path: '/contact', component: ContactPage }
+  { path: '/help', component: ContactPage }
 ]
 
 const router = createRouter({
