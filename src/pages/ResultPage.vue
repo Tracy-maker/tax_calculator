@@ -13,7 +13,7 @@ import ResultDisplay from '@/components/ResultDisplay.vue';
 export default {
   data() {
     return {
-      taxableIncome: 50000, // Sample data, replace with real calculation data
+      taxableIncome: 50000, 
       taxAmount: 10000,
       incomeAfterTax: 40000,
     };

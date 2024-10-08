@@ -37,7 +37,7 @@
     </section>
 
     <!-- Call to Action and Additional Info -->
-    <section class="text-center space-y-3">
+    <section class="text-center space-y-5">
       <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed">
         Simplify tax calculations with a tool that’s accurate, intuitive, and designed for all
         employment types. Start exploring your tax profile today.

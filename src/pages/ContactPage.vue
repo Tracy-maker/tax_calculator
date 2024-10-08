@@ -1,7 +1,7 @@
 <template>
-  <div class="container mx-auto p-4 space-y-12">
+  <div class="container mx-auto p-4 space-y-8">
     <!-- Header Section -->
-    <section class="text-center mb-8">
+    <section class="text-center mb-4">
       <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Help & Support</h1>
       <p class="text-base text-gray-600 max-w-4xl mx-auto leading-relaxed">
         Find answers to common questions, or reach out to our support team for further assistance.
@@ -11,7 +11,7 @@
 
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- FAQ Section -->
-      <div class="space-y-6">
+      <div class="space-y-4">
         <h2 class="text-lg font-semibold text-blue-700">Frequently Asked Questions</h2>
         <div class="space-y-4">
           <details class="bg-white p-4 rounded-lg shadow-md">
