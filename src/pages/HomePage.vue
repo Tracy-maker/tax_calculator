@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto p-8 space-y-6 bg-gray-50">
+  <div class="container mx-auto p-8 spa=-p【‘- bg-gray-50">
     <!-- Header Section -->
     <section class="text-center">
       <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Australian Income Tax Calculator</h1>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed pb-2">
         Effortlessly estimate your personal income tax with just a few steps. Gain insights into
         your tax obligations and see where your income stands among other Australians.
       </p>
@@ -38,7 +38,7 @@
 
     <!-- Call to Action and Additional Info -->
     <section class="text-center space-y-5">
-      <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed pt-2">
         Simplify tax calculations with a tool that’s accurate, intuitive, and designed for all
         employment types. Start exploring your tax profile today.
       </p>

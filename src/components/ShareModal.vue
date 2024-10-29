@@ -9,7 +9,7 @@
         Facebook
       </button>
       <button @click="share('weibo')" class="w-full p-2 bg-red-500 text-white rounded">RED</button>
-      <button @click="$emit('close')" class="mt-4 p-2 w-full bg-gray-300 rounded">关闭</button>
+      <button @click="$emit('close')" class="mt-4 p-2 w-full bg-gray-300 rounded">close</button>
     </div>
   </div>
 </template>

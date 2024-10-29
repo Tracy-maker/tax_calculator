@@ -11,6 +11,7 @@
     <!-- Bar Chart Section -->
     <div class="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
       <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Income Breakdown</h3>
+  
       <BarChart :taxAmount="taxAmount" :incomeAfterTax="incomeAfterTax" />
     </div>
 
@@ -30,43 +31,24 @@
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
-
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+import BarChart from './BarChart.vue';
 
 export default {
+  name: 'ResultDisplay',
+  components: { BarChart },
   props: {
-    taxableIncome: Number,
-    taxAmount: Number,
-    incomeAfterTax: Number,
-  },
-  components: {
-    BarChart: {
-      props: ['taxAmount', 'incomeAfterTax'],
-      extends: Bar,
-      mounted() {
-        this.renderChart(
-          {
-            labels: ['Tax Amount', 'After Tax Income'],
-            datasets: [
-              {
-                label: 'Income Breakdown',
-                backgroundColor: ['#6366F1', '#34D399'],
-                data: [this.taxAmount, this.incomeAfterTax],
-              },
-            ],
-          },
-          { responsive: true, maintainAspectRatio: false }
-        );
-      },
+    taxableIncome: {
+      type: Number,
+      required: true,
+    },
+    taxAmount: {
+      type: Number,
+      required: true,
+    },
+    incomeAfterTax: {
+      type: Number,
+      required: true,
     },
   },
 };
 </script>
-
-<style scoped>
-.container {
-  max-width: 1080px;
-}
-</style>

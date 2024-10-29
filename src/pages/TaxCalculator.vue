@@ -1,156 +1,171 @@
 <template>
-  <div class="container mx-auto p-1 max-w-4xl">
-    <h2 class="text-4xl font-bold mb-4 text-center text-indigo-600">
-      Australian Income Tax Calculator
-    </h2>
-    <p class="text-gray-600 text-center mb-8">
-      Enter your income and employment details below to calculate your taxable income, tax, and after-tax earnings.
-    </p>
+  <div class="container mx-auto p-2 max-w-2xl space-y-5 bg-white rounded-lg shadow-lg">
+    <!-- Header Section -->
+    <header class="text-center space-y-2">
+      <h2 class="text-3xl font-bold text-indigo-700">Australian Income Tax Calculator</h2>
+      <p class="text-gray-500 text-sm max-w-lg mx-auto leading-relaxed">
+        Quickly estimate your personal income tax by entering your income details below.
+      </p>
+    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Left Column: Inputs (takes 2/3 of the width) -->
-      <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-lg">
-        <!-- Income Input -->
-        <div class="mb-6">
-          <label class="sr-only" for="income">Income</label>
-          <div class="flex items-center border-b-2 border-indigo-300 py-2">
-            <span class="text-indigo-600 font-semibold">AUD</span>
-            <input
-              type="number"
-              v-model.number="income"
-              placeholder="Enter your Annual Income"
-              class="w-full ml-3 outline-none text-gray-700 placeholder-gray-400"
-            />
-          </div>
-        </div>
-
-        <!-- Pay Cycle and Custom Value -->
-        <div class="mb-6">
-          <div class="flex flex-wrap gap-4">
-            <select
-              v-model="payCycle"
-              class="bg-indigo-600 text-white font-semibold rounded-md px-6 py-3 shadow-md focus:ring-2 focus:ring-indigo-400 w-full md:w-48"
-            >
-              <option disabled value="">Select Pay Cycle</option>
-              <option value="Yearly">Yearly</option>
-              <option value="Fortnightly">Fortnightly</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Daily">Daily</option>
-              <option value="Hourly">Hourly</option>
-            </select>
-            <input
-              type="number"
-              v-model="customValue"
-              :disabled="payCycle === 'Yearly'"
-              placeholder="Enter Custom Value"
-              class="border border-indigo-300 rounded-md px-4 py-3 w-full md:w-48 outline-none text-gray-700 shadow-md"
-            />
-          </div>
-          <p class="text-xs text-gray-500 mt-2">
-            Note: Select a <strong>Pay Cycle</strong> and input a corresponding <strong>Custom Value</strong> if it’s not “Yearly”. For example, if you are paid fortnightly, enter your <strong>fortnightly income</strong> in the custom value field.
-          </p>
-          <p class="text-xs text-gray-500 mt-1">
-            * Custom value is only needed if your income is not annual. Otherwise, leave it blank or set it to “Yearly” to calculate based on your annual income.
-          </p>
-        </div>
-
-        <!-- Employment Type Selection -->
-        <div class="mb-6">
-          <h3 class="text-lg font-semibold text-indigo-600 mb-3">Employment Type</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <label class="flex items-center space-x-2 cursor-pointer bg-gray-100 p-2 rounded-md hover:bg-indigo-50 transition">
-              <input
-                type="radio"
-                v-model="employmentType"
-                value="Full-time"
-                class="form-radio text-indigo-500"
-              />
-              <span>Full-time</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer bg-gray-100 p-2 rounded-md hover:bg-indigo-50 transition">
-              <input
-                type="radio"
-                v-model="employmentType"
-                value="Part-time"
-                class="form-radio text-indigo-500"
-              />
-              <span>Part-time</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer bg-gray-100 p-2 rounded-md hover:bg-indigo-50 transition">
-              <input
-                type="radio"
-                v-model="employmentType"
-                value="Casual"
-                class="form-radio text-indigo-500"
-              />
-              <span>Casual</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer bg-gray-100 p-2 rounded-md hover:bg-indigo-50 transition">
-              <input
-                type="radio"
-                v-model="employmentType"
-                value="Contractor"
-                class="form-radio text-indigo-500"
-              />
-              <span>Contractor</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: Results Summary (takes 1/3 of the width) -->
-      <div class="md:col-span-1 bg-gray-100 p-6 rounded-lg shadow-lg">
-        <h3 class="text-lg font-semibold mb-4 text-indigo-600">Calculation Summary</h3>
-        <div class="mb-2">
-          <p><strong>Taxable Income:</strong> AUD {{ taxableIncome }}</p>
-        </div>
-        <div class="mb-2">
-          <p><strong>Tax Amount:</strong> AUD {{ taxAmount }}</p>
-        </div>
-        <div>
-          <p><strong>After Tax Income:</strong> AUD {{ incomeAfterTax }}</p>
-        </div>
-        <!-- Result Button -->
-        <router-link to="/result" class="mt-6 inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200">
-          View Detailed Results
-        </router-link>
-      </div>
+    <!-- Financial Year Selector -->
+    <div class="space-y-2">
+      <label class="text-sm font-semibold text-gray-700">Financial Year</label>
+      <select
+        v-model="selectedYear"
+        class="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg shadow focus:ring-2 focus:ring-indigo-500"
+      >
+        <option disabled value="">Select Year</option>
+        <option v-for="year in Object.keys(taxRates)" :key="year" :value="year">
+          {{ year }}
+        </option>
+      </select>
     </div>
+
+    <!-- Income and Employment Details Section -->
+    <section class="space-y-6">
+      <!-- Income Input -->
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-gray-700">Annual Income (AUD)</label>
+        <div class="relative flex items-center border border-gray-300 rounded-lg p-3 shadow-sm">
+          <span class="text-indigo-600 font-bold">AUD</span>
+          <input
+            type="number"
+            v-model.number="income"
+            placeholder="e.g., 75000"
+            class="ml-2 w-full text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      <!-- Pay Cycle and Custom Value -->
+      <div class="flex gap-4">
+        <div class="w-1/2">
+          <label class="text-sm font-semibold text-gray-700">Pay Cycle</label>
+          <select
+            v-model="payCycle"
+            class="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg shadow focus:ring-2 focus:ring-indigo-500"
+          >
+            <option disabled value="">Choose a Cycle</option>
+            <option value="Yearly">Yearly</option>
+            <option value="Fortnightly">Fortnightly</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Daily">Daily</option>
+            <option value="Hourly">Hourly</option>
+          </select>
+        </div>
+        <div class="w-1/2">
+          <label class="text-sm font-semibold text-gray-700">Custom Value</label>
+          <input
+            type="number"
+            v-model="customValue"
+            :disabled="payCycle === 'Yearly'"
+            placeholder="Custom Value"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      <!-- Note Section -->
+      <div class="text-xs text-gray-500 space-y-1">
+        <p>
+          Note: Select a <strong>Pay Cycle</strong> and input a corresponding
+          <strong>Custom Value</strong> if it’s not “Yearly”. For example, if you are paid
+          fortnightly, enter your <strong>fortnightly income</strong> in the custom value field.
+        </p>
+        <p>
+          * Custom value is only needed if your income is not annual. Select
+          <strong>Pay Cycle</strong> and input a <strong>Custom Value</strong> if applicable.
+        </p>
+      </div>
+
+      <!-- Employment Type Selection -->
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-gray-700">Employment Type</label>
+        <div class="flex gap-4">
+          <button
+            v-for="type in employmentTypes"
+            :key="type"
+            @click="employmentType = type"
+            :class="
+              employmentType === type ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'
+            "
+            class="w-1/4 px-4 py-2 rounded-lg shadow-sm font-semibold transition-colors text-center"
+          >
+            {{ type }}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Button to View Results -->
+    <footer class="text-center">
+      <router-link
+        v-if="isFormValid"
+        :to="{
+          name: 'ResultPage',
+          params: {
+            taxableIncome: taxableIncome,
+            taxAmount: taxAmount,
+            incomeAfterTax: incomeAfterTax
+          }
+        }"
+        class="inline-block w-full md:w-2/3 bg-gradient-to-r from-indigo-500 to-teal-500 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-teal-600 shadow-lg transition-transform transform hover:scale-105"
+      >
+        View Detailed Results
+      </router-link>
+    </footer>
   </div>
 </template>
 
 <script>
+import { taxRates } from '../data/taxRates'
+
 export default {
+  name: 'TaxCalculator',
   data() {
     return {
       income: 0,
       payCycle: '',
       customValue: null,
       employmentType: '',
+      employmentTypes: ['Full-time', 'Part-time', 'Casual', 'Contractor'],
       taxableIncome: 0,
       taxAmount: 0,
-      incomeAfterTax: 0
+      incomeAfterTax: 0,
+      selectedYear: '', 
+      taxRates
+    }
+  },
+  computed: {
+    isFormValid() {
+      return this.income > 0; 
     }
   },
   watch: {
     income: 'calculateTax',
     payCycle: 'calculateTax',
     customValue: 'calculateTax',
-    employmentType: 'calculateTax'
+    employmentType: 'calculateTax',
+    selectedYear: 'calculateTax'
   },
   methods: {
     calculateTax() {
-      // Basic calculation logic
-      this.taxableIncome = this.income
-      this.taxAmount = this.taxableIncome * 0.2 // Example 20% tax rate
-      this.incomeAfterTax = this.taxableIncome - this.taxAmount
+      if (!this.selectedYear || !this.income) return
+      const taxBrackets = this.taxRates[this.selectedYear] // Updated to taxRates
+
+      let tax = 0
+      for (const bracket of taxBrackets) {
+        if (this.income > bracket.incomeMax) {
+          tax += (bracket.incomeMax - bracket.incomeMin) * bracket.rate
+        } else {
+          tax += (this.income - bracket.incomeMin) * bracket.rate
+          break
+        }
+      }
+      this.taxAmount = tax
+      this.incomeAfterTax = this.income - this.taxAmount
     }
   }
 }
 </script>
-
-<style scoped>
-.container {
-  max-width: 1080px;
-}
-</style>
