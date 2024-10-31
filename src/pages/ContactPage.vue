@@ -1,5 +1,8 @@
 <template>
   <div class="container mx-auto p-4 space-y-8">
+    <!-- Modals -->
+    <SuccessModal :show="showSuccessModal" @close="showSuccessModal = false" />
+    <ErrorModal :show="showErrorModal" @close="showErrorModal = false" />
     <!-- Header Section -->
     <section class="text-center mb-4">
       <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Help & Support</h1>
@@ -9,128 +12,58 @@
       </p>
     </section>
 
+    <!-- FAQ and Contact Form Sections -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- FAQ Section -->
-      <div class="space-y-4">
-        <h2 class="text-lg font-semibold text-blue-700">Frequently Asked Questions</h2>
-        <div class="space-y-4">
-          <details class="bg-white p-4 rounded-lg shadow-md">
-            <summary class="font-semibold text-gray-800 cursor-pointer">
-              How do I calculate my income tax?
-            </summary>
-            <p class="mt-2 text-gray-700">
-              Enter your income details and select deductions in the calculator. The tool will
-              estimate your tax based on the latest Australian tax brackets.
-            </p>
-          </details>
-
-          <details class="bg-white p-4 rounded-lg shadow-md">
-            <summary class="font-semibold text-gray-800 cursor-pointer">
-              What employment types does the calculator support?
-            </summary>
-            <p class="mt-2 text-gray-700">
-              Our calculator accommodates full-time, part-time, freelance, and self-employed users
-              to provide accurate tax estimations.
-            </p>
-          </details>
-
-          <details class="bg-white p-4 rounded-lg shadow-md">
-            <summary class="font-semibold text-gray-800 cursor-pointer">
-              Can I save or share my results?
-            </summary>
-            <p class="mt-2 text-gray-700">
-              Yes! You can share your results directly to social media or save a snapshot for future
-              reference.
-            </p>
-          </details>
-        </div>
-      </div>
+      <FAQSection />
 
       <!-- Contact Form Section -->
-      <div class="bg-gray-50 p-4 rounded-lg shadow-md">
-        <h2 class="text-lg font-semibold text-blue-700 mb-2">Contact Support</h2>
-        <p class="text-sm text-gray-600 mb-2">
-          Still have questions? Fill out the form below, and we’ll get back to you as soon as
-          possible.
-        </p>
-
-        <form @submit.prevent="sendEmail" class="space-y-4">
-          <div>
-            <label class="text-xs block text-gray-700">Name</label>
-            <input
-              v-model="formData.from_name"
-              type="text"
-              class="w-full p-2 border rounded-md"
-              placeholder="Your name"
-              required
-            />
-          </div>
-
-          <div>
-            <label class="text-xs block text-gray-700">Email</label>
-            <input
-              v-model="formData.reply_to"
-              type="email"
-              class="w-full p-2 border rounded-md"
-              placeholder="Your email"
-              required
-            />
-          </div>
-
-          <div>
-            <label class="text-xs block text-gray-700">Message</label>
-            <textarea
-              v-model="formData.message"
-              class="w-full p-2 border rounded-md"
-              rows="3"
-              placeholder="How can we help you?"
-              required
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+      <ContactForm @submit="sendEmail" />
     </section>
   </div>
 </template>
 
 <script>
 import emailjs from 'emailjs-com'
+import SuccessModal from '../components/SuccessModal.vue'
+import ErrorModal from '../components/ErrorModal.vue'
+import FAQSection from '../components/FAQSection.vue'
+import ContactForm from '../components/ContactForm.vue'
 
 export default {
-  name: 'ContactPage',
+  components: {
+    SuccessModal,
+    ErrorModal,
+    FAQSection,
+    ContactForm
+  },
   data() {
     return {
-      formData: {
-        from_name: '',
-        reply_to: '',
-        message: ''
-      }
+      showSuccessModal: false,
+      showErrorModal: false
     }
   },
   methods: {
-    sendEmail() {
-      const serviceID = 'service_67wurq6'
-      const templateID = 'template_sn5zspi'
-      const userID = 'oxoqlAi8x4U2CoOZa'
+    sendEmail(formData) {
+      const serviceID = import.meta.env.VITE_SERVICE_ID
+      const templateID = import.meta.env.VITE_TEMPLATE_ID
+      const userID = import.meta.env.VITE_USER_ID
 
       emailjs
-        .send(serviceID, templateID, this.formData, userID)
+        .send(serviceID, templateID, formData, userID)
         .then(() => {
-          alert('Message sent successfully!')
-          this.formData = { from_name: '', reply_to: '', message: '' }
+          this.showSuccessModal = true
         })
         .catch((error) => {
           console.error('EmailJS error:', error)
-          alert('There was an error sending your message. Please try again.')
+          this.showErrorModal = true
         })
     }
   }
 }
 </script>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+}
+</style>
