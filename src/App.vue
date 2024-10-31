@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppHeader />
-    <main class="pt-24 pb-16">
+    <main class="pt-28 pb-16">
       <router-view />
     </main>
     <AppFooter />

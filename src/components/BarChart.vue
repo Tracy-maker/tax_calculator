@@ -16,7 +16,6 @@ import {
   Legend
 } from 'chart.js'
 
-// Register necessary Chart.js components
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
 export default {

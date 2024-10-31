@@ -8,7 +8,9 @@
       <button @click="share('facebook')" class="w-full mb-2 p-2 bg-blue-700 text-white rounded">
         Facebook
       </button>
-      <button @click="share('weibo')" class="w-full p-2 bg-red-500 text-white rounded">RED</button>
+      <button @click="share('linkedin')" class="w-full p-2 bg-blue-800 text-white rounded">
+        LinkedIn
+      </button>
       <button @click="$emit('close')" class="mt-4 p-2 w-full bg-gray-300 rounded">close</button>
     </div>
   </div>
@@ -18,7 +20,26 @@
 export default {
   methods: {
     share(platform) {
-      alert(`Sharing ${platform}`)
+      const shareUrl = encodeURIComponent(window.location.href)
+      const text = encodeURIComponent('Check out my tax calculation results!')
+
+      let url = ''
+
+      switch (platform) {
+        case 'twitter':
+          url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${text}`
+          break
+        case 'facebook':
+          url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
+          break
+        case 'linkedin':
+          url = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`
+          break
+        default:
+          return
+      }
+
+      window.open(url, '_blank', 'width=600,height=400')
     }
   }
 }
