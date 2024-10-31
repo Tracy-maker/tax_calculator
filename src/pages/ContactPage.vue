@@ -5,7 +5,7 @@
       <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Help & Support</h1>
       <p class="text-base text-gray-600 max-w-4xl mx-auto leading-relaxed">
         Find answers to common questions, or reach out to our support team for further assistance.
-        We’re here to help!
+        We're here to help!
       </p>
     </section>
 
@@ -54,10 +54,11 @@
           possible.
         </p>
 
-        <form class="space-y-4">
+        <form @submit.prevent="sendEmail" class="space-y-4">
           <div>
             <label class="text-xs block text-gray-700">Name</label>
             <input
+              v-model="formData.from_name"
               type="text"
               class="w-full p-2 border rounded-md"
               placeholder="Your name"
@@ -68,6 +69,7 @@
           <div>
             <label class="text-xs block text-gray-700">Email</label>
             <input
+              v-model="formData.reply_to"
               type="email"
               class="w-full p-2 border rounded-md"
               placeholder="Your email"
@@ -78,6 +80,7 @@
           <div>
             <label class="text-xs block text-gray-700">Message</label>
             <textarea
+              v-model="formData.message"
               class="w-full p-2 border rounded-md"
               rows="3"
               placeholder="How can we help you?"
@@ -98,13 +101,36 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com'
+
 export default {
-  name: 'ContactPage'
+  name: 'ContactPage',
+  data() {
+    return {
+      formData: {
+        from_name: '',
+        reply_to: '',
+        message: ''
+      }
+    }
+  },
+  methods: {
+    sendEmail() {
+      const serviceID = 'service_67wurq6'
+      const templateID = 'template_sn5zspi'
+      const userID = 'oxoqlAi8x4U2CoOZa'
+
+      emailjs
+        .send(serviceID, templateID, this.formData, userID)
+        .then(() => {
+          alert('Message sent successfully!')
+          this.formData = { from_name: '', reply_to: '', message: '' }
+        })
+        .catch((error) => {
+          console.error('EmailJS error:', error)
+          alert('There was an error sending your message. Please try again.')
+        })
+    }
+  }
 }
 </script>
-
-<style scoped>
-.container {
-  max-width: 1200px;
-}
-</style>
