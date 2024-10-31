@@ -10,7 +10,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "./dist", 
+    "noEmit": true 
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
