@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.ts,.tsx,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
   "dependencies": {
@@ -21,9 +21,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.9",
     "@rushstack/eslint-patch": "^1.8.0",
-    "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/eslint-config-prettier": "^9.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
