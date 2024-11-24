@@ -7,6 +7,32 @@
         Quickly estimate your personal income tax by entering your income details below.
       </p>
     </header>
+    <!-- Error Messages -->
+    <div v-if="validationErrors.length" class="space-y-4">
+      <div
+        v-for="(error, index) in validationErrors"
+        :key="index"
+        class="flex items-center gap-3 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg shadow-md"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6 text-red-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01M12 6a9 9 0 110 18 9 9 0 010-18z"
+          />
+        </svg>
+        <span class="text-sm text-red-600 font-semibold">
+          {{ error }}
+        </span>
+      </div>
+    </div>
 
     <!-- Financial Year Selector -->
     <div class="space-y-2">
@@ -39,12 +65,15 @@
       </div>
 
       <!-- Pay Cycle and Custom Value -->
-      <div class="flex gap-4">
-        <div class="w-1/2">
-          <label class="text-sm font-semibold text-gray-700">Pay Cycle</label>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1"> Pay Cycle </label>
+          <p class="text-xs text-gray-500 mb-2">
+            Select how often you are paid (e.g., weekly, yearly).
+          </p>
           <select
             v-model="payCycle"
-            class="w-full px-4 py-2 bg-blue-400 text-white rounded-lg shadow focus:ring-2 focus:ring-indigo-500"
+            class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg focus:ring-2 focus:ring-indigo-500 transition-colors"
           >
             <option disabled value="">Choose a Cycle</option>
             <option value="Yearly">Yearly</option>
@@ -54,14 +83,18 @@
             <option value="Hourly">Hourly</option>
           </select>
         </div>
-        <div class="w-1/2">
-          <label class="text-sm font-semibold text-gray-700">Custom Value</label>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1"> Custom Value </label>
+          <p class="text-xs text-gray-500 mb-2">
+            Specify a custom amount if your pay cycle is not yearly.
+          </p>
           <input
             type="number"
             v-model.number="customValue"
             :disabled="payCycle === 'Yearly'"
-            placeholder="Custom Value"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-2 focus:ring-indigo-500"
+            placeholder="Enter Custom Value"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
       </div>
@@ -127,6 +160,12 @@ export default {
   computed: {
     isFormValid() {
       return this.income > 0 && this.selectedYear !== ''
+    },
+    validationErrors() {
+      const errors = []
+      if (this.income <= 0) errors.push('Please enter a valid income greater than 0.')
+      if (!this.selectedYear) errors.push('Please select a financial year.')
+      return errors
     }
   },
   watch: {
